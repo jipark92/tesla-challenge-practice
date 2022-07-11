@@ -65,20 +65,28 @@ const checkCondition = (region, model, data) => {
     if (regionSelect === "ALL" && modelSelect === "ALL") return data;
 };
 
+const render = (renderData) => {
+    box.innerHTML = renderData;
+};
+
+const dataList = (region, model, sales) => {
+    return `
+    <div class="list">
+        <p>REGION: ${region}</p>
+        <p>MODEL: ${model}</p>
+        <p>SALES: ${sales}</p>
+    </div>
+`;
+};
+
 const renderDefault = () => {
     const renderData = teslaData
         .map((data, i) => {
             const { region, model, sales } = data;
-            return `
-        <div class="list">
-            <p>REGION: ${region}</p>
-            <p>MODEL: ${model}</p>
-            <p>SALES: ${sales}</p>
-        </div>
-    `;
+            return dataList(region, model, sales);
         })
         .join("");
-    box.innerHTML = renderData;
+    render(renderData);
 };
 renderDefault();
 
@@ -93,16 +101,10 @@ const renderFilter = () => {
             })
             .map((data) => {
                 const { region, model, sales } = data;
-                return `
-            <div class="list">
-                <p>REGION: ${region}</p>
-                <p>MODEL: ${model}</p>
-                <p>SALES: ${sales}</p>
-            </div>
-        `;
+                return dataList(region, model, sales);
             })
             .join("");
-        box.innerHTML = renderData;
+        render(renderData);
     });
     //model filter
     selectModel.addEventListener("change", () => {
@@ -114,16 +116,10 @@ const renderFilter = () => {
             })
             .map((data) => {
                 const { region, model, sales } = data;
-                return `
-            <div class="list">
-                <p>REGION: ${region}</p>
-                <p>MODEL: ${model}</p>
-                <p>SALES: ${sales}</p>
-            </div>
-        `;
+                return dataList(region, model, sales);
             })
             .join("");
-        box.innerHTML = renderData;
+        render(renderData);
     });
 };
 renderFilter();
