@@ -1,23 +1,21 @@
-.test1{
-    /* border: 1px solid red; */
+.test1 {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+    border: 1px solid black;
+    width: 25%;
+    padding: 1rem;
+
 }
 
-.box{
-    /* border: 1px solid red; */
-    display:flex;
+.box {
+    display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap; */
-    gap:1rem;
+    gap: 1rem;
 }
 
-.list{
+.list {
     display: flex;
     gap: 2rem;
-
-    width: 25%;
     border: 1px solid red;
-
 }
-

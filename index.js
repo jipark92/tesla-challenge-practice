@@ -1,14 +1,3 @@
-// render text 5 times
-const render5Times = () =>{
-    for (let i = 0; i < 5; i++) {
-        box.textContent += " world"
-        const element = document.createElement("div");
-        element.textContent = "world";
-        box.appendChild(element);
-    }
-}
-
-
 //filter using two select options
 const teslaData = [
     {
@@ -62,53 +51,107 @@ const teslaData = [
         sales: 400,
     },
 ];
+
 const box = document.querySelector(".box");
-// console.log(teslaData);
+const selectRegion = document.querySelector(".region");
+const selectModel = document.querySelector(".model");
 
+let regionSelect = "ALL";
+let modelSelect = "ALL";
 
-const selectRegion = document.querySelector('.options')
-
-let regionSelect = "ALL"
-
-const renderDefault = () =>{
-    const renderData = teslaData 
-    .map((data,i)=>{
-        const { region, model, sales } = data;
-        return `
+const renderDefault = () => {
+    const renderData = teslaData
+        .map((data, i) => {
+            const { region, model, sales } = data;
+            return `
         <div class="list">
             <p>REGION: ${region}</p>
             <p>MODEL: ${model}</p>
             <p>SALES: ${sales}</p>
         </div>
     `;
-    }).join('')
-    box.innerHTML = renderData
-}
-renderDefault()
-
-const renderFilter = () =>{
-    selectRegion.addEventListener('change',()=>{
-        regionSelect = selectRegion.value 
-        const renderData = teslaData
-        .filter((data)=>{
-            const { region, model, sales } = data;
-            if(region === regionSelect)return data
-            if(region === regionSelect) return data
-            if(region === regionSelect) return data
-            if(regionSelect === "ALL") return data
         })
-        .map((data) => {
-            const { region, model, sales } = data;
-            return `
+        .join("");
+    box.innerHTML = renderData;
+};
+renderDefault();
+
+const renderFilter = () => {
+    //region filter
+    selectRegion.addEventListener("change", () => {
+        regionSelect = selectRegion.value;
+        const renderData = teslaData
+            .filter((data) => {
+                const { region, model, sales } = data;
+                if (region === regionSelect && modelSelect === "ALL") return data;
+                if (region === regionSelect && model === modelSelect) return data;
+                if (regionSelect === "ALL" && model === modelSelect) return data;
+                if (regionSelect === "ALL" && modelSelect === "ALL") return data;
+            })
+            .map((data) => {
+                const { region, model, sales } = data;
+                return `
             <div class="list">
                 <p>REGION: ${region}</p>
                 <p>MODEL: ${model}</p>
                 <p>SALES: ${sales}</p>
             </div>
         `;
-        })
-        .join("");
-    box.innerHTML = renderData;
-    })
-}
-renderFilter()
+            })
+            .join("");
+        box.innerHTML = renderData;
+    });
+    //model filter
+    selectModel.addEventListener("change", () => {
+        modelSelect = selectModel.value;
+        const renderData = teslaData
+            .filter((data) => {
+                const { region, model, sales } = data;
+                if (region === regionSelect && modelSelect === "ALL") return data;
+                if (region === regionSelect && model === modelSelect) return data;
+                if (regionSelect === "ALL" && model === modelSelect) return data;
+                if (regionSelect === "ALL" && modelSelect === "ALL") return data;
+            })
+            .map((data) => {
+                const { region, model, sales } = data;
+                return `
+            <div class="list">
+                <p>REGION: ${region}</p>
+                <p>MODEL: ${model}</p>
+                <p>SALES: ${sales}</p>
+            </div>
+        `;
+            })
+            .join("");
+        box.innerHTML = renderData;
+    });
+};
+renderFilter();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// render text 5 times
+const render5Times = () => {
+    for (let i = 0; i < 5; i++) {
+        box.textContent += " world";
+        const element = document.createElement("div");
+        element.textContent = "world";
+        box.appendChild(element);
+    }
+};
