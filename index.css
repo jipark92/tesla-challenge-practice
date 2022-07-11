@@ -1,0 +1,23 @@
+.test1{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+}
+
+.box{
+    /* border: 1px solid red; */
+    display:flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    gap:1rem;
+}
+
+.list{
+    display: flex;
+    gap: 2rem;
+
+    width: 25%;
+    border: 1px solid red;
+
+}
+
