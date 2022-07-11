@@ -1,4 +1,3 @@
-//filter using two select options
 const teslaData = [
     {
         region: "US",
@@ -59,6 +58,13 @@ const selectModel = document.querySelector(".model");
 let regionSelect = "ALL";
 let modelSelect = "ALL";
 
+const checkCondition = (region, model, data) => {
+    if (region === regionSelect && modelSelect === "ALL") return data;
+    if (region === regionSelect && model === modelSelect) return data;
+    if (regionSelect === "ALL" && model === modelSelect) return data;
+    if (regionSelect === "ALL" && modelSelect === "ALL") return data;
+};
+
 const renderDefault = () => {
     const renderData = teslaData
         .map((data, i) => {
@@ -83,10 +89,7 @@ const renderFilter = () => {
         const renderData = teslaData
             .filter((data) => {
                 const { region, model, sales } = data;
-                if (region === regionSelect && modelSelect === "ALL") return data;
-                if (region === regionSelect && model === modelSelect) return data;
-                if (regionSelect === "ALL" && model === modelSelect) return data;
-                if (regionSelect === "ALL" && modelSelect === "ALL") return data;
+                return checkCondition(region, model, data);
             })
             .map((data) => {
                 const { region, model, sales } = data;
@@ -107,10 +110,7 @@ const renderFilter = () => {
         const renderData = teslaData
             .filter((data) => {
                 const { region, model, sales } = data;
-                if (region === regionSelect && modelSelect === "ALL") return data;
-                if (region === regionSelect && model === modelSelect) return data;
-                if (regionSelect === "ALL" && model === modelSelect) return data;
-                if (regionSelect === "ALL" && modelSelect === "ALL") return data;
+                return checkCondition(region, model, data);
             })
             .map((data) => {
                 const { region, model, sales } = data;
@@ -128,30 +128,12 @@ const renderFilter = () => {
 };
 renderFilter();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // render text 5 times
-const render5Times = () => {
-    for (let i = 0; i < 5; i++) {
-        box.textContent += " world";
-        const element = document.createElement("div");
-        element.textContent = "world";
-        box.appendChild(element);
-    }
-};
+// const render5Times = () => {
+//     for (let i = 0; i < 5; i++) {
+//         box.textContent += " world";
+//         const element = document.createElement("div");
+//         element.textContent = "world";
+//         box.appendChild(element);
+//     }
+// };
