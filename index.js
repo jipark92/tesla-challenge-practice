@@ -79,13 +79,21 @@ const dataList = (region, model, sales) => {
 `;
 };
 
-const renderDefault = () => {
-    const renderData = teslaData
-        .map((data, i) => {
+const filterAndMap = () => {
+    return teslaData
+        .filter((data) => {
+            const { region, model } = data;
+            return checkCondition(region, model, data);
+        })
+        .map((data) => {
             const { region, model, sales } = data;
             return dataList(region, model, sales);
         })
         .join("");
+}
+
+const renderDefault = () => {
+    const renderData = filterAndMap()
     render(renderData);
 };
 renderDefault();
@@ -94,35 +102,19 @@ const renderFilter = () => {
     //region filter
     selectRegion.addEventListener("change", () => {
         regionSelect = selectRegion.value;
-        const renderData = teslaData
-            .filter((data) => {
-                const { region, model, sales } = data;
-                return checkCondition(region, model, data);
-            })
-            .map((data) => {
-                const { region, model, sales } = data;
-                return dataList(region, model, sales);
-            })
-            .join("");
+        const renderData = filterAndMap()
         render(renderData);
     });
     //model filter
     selectModel.addEventListener("change", () => {
         modelSelect = selectModel.value;
-        const renderData = teslaData
-            .filter((data) => {
-                const { region, model, sales } = data;
-                return checkCondition(region, model, data);
-            })
-            .map((data) => {
-                const { region, model, sales } = data;
-                return dataList(region, model, sales);
-            })
-            .join("");
+        const renderData = filterAndMap()
         render(renderData);
     });
 };
 renderFilter();
+
+
 
 // render text 5 times
 // const render5Times = () => {
