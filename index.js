@@ -79,7 +79,7 @@ const dataList = (region, model, sales) => {
 `;
 };
 
-const filterAndMap = () => {
+const dataFilterAndMap = () => {
     return teslaData
         .filter((data) => {
             const { region, model } = data;
@@ -90,10 +90,10 @@ const filterAndMap = () => {
             return dataList(region, model, sales);
         })
         .join("");
-}
+};
 
 const renderDefault = () => {
-    const renderData = filterAndMap()
+    const renderData = dataFilterAndMap();
     render(renderData);
 };
 renderDefault();
@@ -102,19 +102,17 @@ const renderFilter = () => {
     //region filter
     selectRegion.addEventListener("change", () => {
         regionSelect = selectRegion.value;
-        const renderData = filterAndMap()
+        const renderData = dataFilterAndMap();
         render(renderData);
     });
     //model filter
     selectModel.addEventListener("change", () => {
         modelSelect = selectModel.value;
-        const renderData = filterAndMap()
+        const renderData = dataFilterAndMap();
         render(renderData);
     });
 };
 renderFilter();
-
-
 
 // render text 5 times
 // const render5Times = () => {
