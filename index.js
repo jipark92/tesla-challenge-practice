@@ -79,11 +79,50 @@ const dataList = (region, model, sales) => {
 `;
 };
 
+const sumFn = () => {
+    let sum = teslaData.reduce(
+        (total, data) => {
+            const { region, sales } = data;
+            if (region === "US") total.us += sales;
+            if (region === "EU") total.eu += sales;
+            if (region === "CA") total.ca += sales;
+            return total;
+        },
+        {
+            us: 0,
+            eu: 0,
+            ca: 0,
+        }
+    );
+    teslaData.push(
+        {
+            region: "US",
+            model: "SUM",
+            sales: sum.us,
+        },
+        {
+            region: "EU",
+            model: "SUM",
+            sales: sum.eu,
+        },
+        {
+            region: "CA",
+            model: "SUM",
+            sales: sum.ca,
+        }
+    );
+};
+sumFn();
+
 const dataFilterAndMap = () => {
     return teslaData
         .filter((data) => {
             const { region, model } = data;
             return checkCondition(region, model, data);
+        })
+        .sort((a, b) => {
+            if (a.region < b.region) return 1;
+            return -1;
         })
         .map((data) => {
             const { region, model, sales } = data;
